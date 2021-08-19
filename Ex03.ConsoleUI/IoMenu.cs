@@ -517,7 +517,7 @@ namespace Ex03.ConsoleUI
             serialNumber = askForSerialNumber();
             if(m_LogicMember.IsOnFuel(serialNumber))
             {
-                Console.WriteLine("This is not work on fuel");
+                Console.WriteLine("This Is not electric vehicle");
                 Console.WriteLine("Press Any Key to continue");
                 Console.ReadLine();
 
@@ -586,7 +586,7 @@ namespace Ex03.ConsoleUI
             {
                 fuelAmount = float.Parse(fuelAmountStr);
             }
-            catch (FormatException)
+            catch (Exception)
             {
                 Console.WriteLine("Please enter digits only");
                 askForFuelAmount();

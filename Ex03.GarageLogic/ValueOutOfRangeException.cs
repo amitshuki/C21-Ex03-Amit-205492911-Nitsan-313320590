@@ -10,6 +10,10 @@ namespace Ex03.GarageLogic
        public float m_MaxValue;
        public float m_MinValue;
 
+       public ValueOutOfRangeException(float i_MaxValue, float i_MinValue)
+       {
+            Console.WriteLine($"value is out of Range The max value is {i_MaxValue} and you already have {i_MinValue}");
+       }
        public float MaxValue
        {
            get => m_MaxValue;
