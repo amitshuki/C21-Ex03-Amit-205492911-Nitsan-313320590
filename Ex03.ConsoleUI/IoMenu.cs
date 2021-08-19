@@ -76,11 +76,16 @@ namespace Ex03.ConsoleUI
         {
             bool driveDangerousMaterials = false;
             float MaxCarryingWeightStr = 0;
+            string fuelAmountStr;
+            float fuelAmount;
 
             driveDangerousMaterials = isDrivingDangerousMaterials();
             MaxCarryingWeightStr = getMaxCarryWeight();
+            Console.WriteLine("Enter the current fuel amount : ");
+            fuelAmountStr = Console.ReadLine();
+            fuelAmount = energyLeft(fuelAmountStr);
 
-            m_LogicMember.AddTruck(i_LicenseNumber, driveDangerousMaterials, MaxCarryingWeightStr, i_CurrentAirPressure, i_WheelManufacturer);
+            m_LogicMember.AddTruck(i_LicenseNumber, driveDangerousMaterials, MaxCarryingWeightStr, i_CurrentAirPressure, i_WheelManufacturer, fuelAmount);
         }
 
         private bool isDrivingDangerousMaterials()
@@ -140,10 +145,16 @@ namespace Ex03.ConsoleUI
         {
             eCarDoorAmount doorsNumber;
             eCarColor color;
+            string butteryTimeStr;
+            float butteryTime;
+
             color = getCarColor();
             doorsNumber = getDoorsNumber();
+            Console.WriteLine("Enter the current buttery amount : ");
+            butteryTimeStr = Console.ReadLine();
+            butteryTime = energyLeft(butteryTimeStr);
 
-            m_LogicMember.AddElectricCar(i_LicenseNumber, color, doorsNumber, i_CurrentAirPressure, i_WheelManufacturer);
+            m_LogicMember.AddElectricCar(i_LicenseNumber, color, doorsNumber, i_CurrentAirPressure, i_WheelManufacturer, butteryTime);
         }
 
         private eCarDoorAmount getDoorsNumber()
@@ -214,21 +225,32 @@ namespace Ex03.ConsoleUI
         {
             eCarDoorAmount doorsNumber;
             eCarColor color;
+            string fuelStr;
+            float fuel;
+
             color = getCarColor();
             doorsNumber = getDoorsNumber();
+            Console.WriteLine("Enter the current fuel amount : ");
+            fuelStr = Console.ReadLine();
+            fuel = energyLeft(fuelStr);
 
-            m_LogicMember.AddFuelCar(i_LicenseNumber, color, doorsNumber, i_CurrentAirPressure, i_WheelManufacturer);
+            m_LogicMember.AddFuelCar(i_LicenseNumber, color, doorsNumber, i_CurrentAirPressure, i_WheelManufacturer, fuel);
         }
 
         private void electricMotorcycleMenu(string i_LicenseNumber, float i_CurrentAirPressure, string i_WheelManufacturer)
         {
             eDriverType licenseType;
             int engineVolume;
+            string butteryTimeStr;
+            float butteryTime;
 
             licenseType = getLicenseType();
             engineVolume = getEngineVolume();
 
-            m_LogicMember.AddElectricMotor(i_LicenseNumber, licenseType, engineVolume, i_CurrentAirPressure, i_WheelManufacturer);
+            Console.WriteLine("Enter the current buttery amount : ");
+            butteryTimeStr = Console.ReadLine();
+            butteryTime = energyLeft(butteryTimeStr);
+            m_LogicMember.AddElectricMotor(i_LicenseNumber, licenseType, engineVolume, i_CurrentAirPressure, i_WheelManufacturer, butteryTime);
         }
 
         private int getEngineVolume()
@@ -283,11 +305,15 @@ namespace Ex03.ConsoleUI
         {
             eDriverType licenseType;
             int engineVolume;
+            string fuelAmountStr;
+            float fuelAmount;
 
             licenseType = getLicenseType();
             engineVolume = getEngineVolume();
-
-            m_LogicMember.AddFuelMotor(i_LicenseNumber, licenseType, engineVolume, i_CurrentAirPressure, i_WheelManufacturer);
+            Console.WriteLine("Enter the current fuel amount : ");
+            fuelAmountStr = Console.ReadLine();
+            fuelAmount = energyLeft(fuelAmountStr);
+            m_LogicMember.AddFuelMotor(i_LicenseNumber, licenseType, engineVolume, i_CurrentAirPressure, i_WheelManufacturer, fuelAmount);
         }
 
         private void isLegalTypeOfVehicle(int i_VehicleNumber)
@@ -696,46 +722,23 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("List is empty");
             Console.ReadLine();
         }
-        private float currentFuelAmount()
-        {
-            string fuelAmountStr;
-            float fuelAmount = 0;
 
-            Console.WriteLine("Enter the current fuel amount : ");
-            fuelAmountStr = Console.ReadLine();
+        private float energyLeft(string eneRgyStr)
+        {
+            float energy = 0;
 
             try
             {
-                fuelAmount = float.Parse(fuelAmountStr);
+                energy = float.Parse(eneRgyStr);
             }
             catch (FormatException)
             {
                 Console.WriteLine("Please enter digits only");
-                currentFuelAmount();
+                eneRgyStr = Console.ReadLine();
+                energyLeft(eneRgyStr);
             }
 
-            return fuelAmount;
-        }
-
-        private float butteryTimeLeft()
-        {
-            string butteryTimeStr;
-            float butteryTime = 0;
-
-            Console.WriteLine("Enter the current fuel amount : ");
-            butteryTimeStr = Console.ReadLine();
-
-            try
-            {
-                butteryTime = float.Parse(butteryTimeStr);
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Please enter digits only");
-                butteryTimeLeft();
-            }
-
-            return butteryTime;
+            return energy;
         }
     }
 }

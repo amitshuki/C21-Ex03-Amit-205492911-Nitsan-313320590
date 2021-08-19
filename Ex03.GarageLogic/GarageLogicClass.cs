@@ -15,31 +15,39 @@ namespace Ex03.GarageLogic
             m_CarInGarages.Add(m_CurrentVehicleInGarage);
         }
 
-        public void AddFuelCar(string i_LicenseNumber, eCarColor i_CarColor, eCarDoorAmount i_CarDoor, float i_CurrentAirPressure, string i_WheelManufacturer)
+        public void AddFuelCar(string i_LicenseNumber, eCarColor i_CarColor, eCarDoorAmount i_CarDoor, float i_CurrentAirPressure, string i_WheelManufacturer, float i_CurrentFuel)
         {
             m_CurrentVehicleInGarage.m_Vehicle = new Car(i_LicenseNumber, i_CarColor, i_CarDoor, i_CurrentAirPressure, i_WheelManufacturer);
             m_CurrentVehicleInGarage.m_Vehicle.Name = m_CurrentVehicleInGarage.OwnerName;
+            m_CurrentVehicleInGarage.m_Vehicle.m_PercentageOfEnergyLeft = i_CurrentFuel;
+
         }
-        public void AddElectricCar(string i_LicenseNumber, eCarColor i_CarColor, eCarDoorAmount i_CarDoor, float i_CurrentAirPressure, string i_WheelManufacturer)
+        public void AddElectricCar(string i_LicenseNumber, eCarColor i_CarColor, eCarDoorAmount i_CarDoor, float i_CurrentAirPressure, string i_WheelManufacturer, float i_CurrentTimeLeft)
         {
             m_CurrentVehicleInGarage.m_Vehicle = new Car(i_LicenseNumber, eEngineType.Electric, i_CarColor, i_CarDoor, i_CurrentAirPressure, i_WheelManufacturer);
             m_CurrentVehicleInGarage.m_Vehicle.Name = m_CurrentVehicleInGarage.OwnerName;
+            m_CurrentVehicleInGarage.m_Vehicle.m_PercentageOfEnergyLeft = i_CurrentTimeLeft;
         }
-        public void AddFuelMotor(string i_LicenseNumber, eDriverType i_DriverType, int i_EngineVolume, float i_AirPressure, string i_WheelManufacturer)
+        public void AddFuelMotor(string i_LicenseNumber, eDriverType i_DriverType, int i_EngineVolume, float i_AirPressure, string i_WheelManufacturer, float i_CurrentFuel)
         {
             m_CurrentVehicleInGarage.m_Vehicle = new MotorCycle(i_LicenseNumber, i_DriverType, i_EngineVolume, i_AirPressure, i_WheelManufacturer);
             m_CurrentVehicleInGarage.m_Vehicle.Name = m_CurrentVehicleInGarage.OwnerName;
+            m_CurrentVehicleInGarage.m_Vehicle.m_PercentageOfEnergyLeft = i_CurrentFuel;
+
+
         }
-        public void AddElectricMotor(string i_LicenseNumber, eDriverType i_DriverType, int i_EngineVolume, float i_AirPressure, string i_WheelManufacturer)
+        public void AddElectricMotor(string i_LicenseNumber, eDriverType i_DriverType, int i_EngineVolume, float i_AirPressure, string i_WheelManufacturer, float i_CurrentTimeLeft)
         {
             m_CurrentVehicleInGarage.m_Vehicle = new MotorCycle(i_LicenseNumber, eEngineType.Electric, i_DriverType, i_EngineVolume, i_AirPressure, i_WheelManufacturer);
             m_CurrentVehicleInGarage.m_Vehicle.Name = m_CurrentVehicleInGarage.OwnerName;
+            m_CurrentVehicleInGarage.m_Vehicle.m_PercentageOfEnergyLeft = i_CurrentTimeLeft;
         }
 
-        public void AddTruck(string i_LicenseNumber, bool i_IsCarryDangerousMaterials, float i_MaxCarryLimit, float i_AirPressure, string i_WheelManufacturer)
+        public void AddTruck(string i_LicenseNumber, bool i_IsCarryDangerousMaterials, float i_MaxCarryLimit, float i_AirPressure, string i_WheelManufacturer, float i_CurrentFuel)
         {
             m_CurrentVehicleInGarage.m_Vehicle = new Truck(i_LicenseNumber, i_IsCarryDangerousMaterials, i_MaxCarryLimit, i_AirPressure, i_WheelManufacturer);
             m_CurrentVehicleInGarage.m_Vehicle.Name = m_CurrentVehicleInGarage.OwnerName;
+            m_CurrentVehicleInGarage.m_Vehicle.m_PercentageOfEnergyLeft = i_CurrentFuel;
         }
 
         public bool IsVehicleExist(String i_CarNumber)
