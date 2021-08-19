@@ -43,6 +43,13 @@ namespace Ex03.ConsoleUI
                 System.Console.Clear();
 
                 otherDetailsByVehicleType(vehicleNumber, vehicleType, currentAirPressure, wheelManufacturer);
+                PrintSuccess();
+            }
+            else
+            {
+                Console.WriteLine("This vehicle is already in the system\nThe Status Changed To : In repair");
+                m_LogicMember.ChangeStatus(vehicleNumber,eCarStatus.InRepair);
+                Console.ReadLine();
             }
         }
 
@@ -467,6 +474,7 @@ namespace Ex03.ConsoleUI
             else if (i_SelectedAction == 4)
             {
                 m_LogicMember.UpdateWheelPressuresToMax();
+                PrintSuccess();
             }
             else if (i_SelectedAction == 5)
             {
@@ -489,18 +497,38 @@ namespace Ex03.ConsoleUI
 
             serialNumber = askForSerialNumber();
             string msg = m_LogicMember.GetAllDetails(serialNumber);
-            System.Console.WriteLine(msg);
-            Console.ReadLine();
+            if(msg.Length == 0)
+            {
+                PrintListIsEmpty();
+            }
+            else
+            {
+                System.Console.WriteLine(msg);
+                Console.ReadLine();
+            }
+         
         }
 
         private void chargeElectronicVehicle()
         {
             string serialNumber;
             float amountToCharge;
-
+            
             serialNumber = askForSerialNumber();
-            amountToCharge = askForAmountToCharge();
-            m_LogicMember.ChargeCar(serialNumber, amountToCharge);
+            if(m_LogicMember.IsOnFuel(serialNumber))
+            {
+                Console.WriteLine("This is not work on fuel");
+                Console.WriteLine("Press Any Key to continue");
+                Console.ReadLine();
+
+            }
+            else
+            {
+                amountToCharge = askForAmountToCharge();
+                m_LogicMember.ChargeCar(serialNumber, amountToCharge);
+                PrintSuccess();
+            }
+             
         }
 
         private float askForAmountToCharge()
@@ -531,9 +559,20 @@ namespace Ex03.ConsoleUI
             float fuelAmount;
 
             serialNumber = askForSerialNumber();
-            fuelType = askForFuelType();
-            fuelAmount = askForFuelAmount();
-            m_LogicMember.FuelCar(serialNumber, fuelType, fuelAmount);
+            if(m_LogicMember.IsOnFuel(serialNumber))
+            {
+                fuelType = askForFuelType();
+                fuelAmount = askForFuelAmount();
+                m_LogicMember.FuelCar(serialNumber, fuelType, fuelAmount);
+            }
+            else
+            {
+                Console.WriteLine("This is not work on fuel");
+                Console.WriteLine("Press Any Key to continue");
+                Console.ReadLine();
+            }
+            
+       
         }
 
         private float askForFuelAmount()
@@ -604,6 +643,7 @@ namespace Ex03.ConsoleUI
             serialNumber = askForSerialNumber();
             vehicleStatus = askForStatus();
             m_LogicMember.ChangeStatus(serialNumber, vehicleStatus);
+            PrintSuccess();
         }
 
         private string askForSerialNumber()
@@ -720,6 +760,13 @@ namespace Ex03.ConsoleUI
         private void PrintListIsEmpty()
         {
             Console.WriteLine("List is empty");
+            Console.ReadLine();
+        }
+
+        void PrintSuccess()
+        {
+            Console.WriteLine("The task was completed successfully");
+            Console.WriteLine("Press Any key To continue");
             Console.ReadLine();
         }
 

@@ -40,7 +40,7 @@ namespace Ex03.GarageLogic
             {
                 enginenName = "Electric Engine";
             }
-            string msg = ($"{Name} {LicenseNumber} , {PercentageOfEnergyLeft} energy left,{this.GetWheelCount()} Wheels with {this.GetWheelAirPressure()} air pressure \n {enginenName} ")
+            string msg = ($"{Name} {LicenseNumber} , {PercentageOfEnergyLeft} energy left,{this.GetWheelCount()} Wheels with {this.GetWheelAirPressure()} air pressure \n{enginenName} ")
                 +($"\n This Truck Can carry up to {m_MaxCarryLimit} And {canOrcant} Carry Dangerous Materials");
             return msg;
         }

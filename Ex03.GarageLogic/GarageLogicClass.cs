@@ -140,5 +140,19 @@ namespace Ex03.GarageLogic
 
             return msg;
         }
+
+        public bool IsOnFuel(string i_CarNumber)
+        {
+            bool res = false;
+
+            m_CurrentVehicleInGarage =
+                m_CarInGarages.Find(vehicle => vehicle.Vehicle.LicenseNumber == (i_CarNumber));
+            if(m_CurrentVehicleInGarage.Vehicle.m_Engine is FuelEngine)
+            {
+                res = !res;
+            }
+
+            return res;
+        }
     }
 }

@@ -60,7 +60,7 @@ namespace Ex03.GarageLogic
             {
                 enginenName = "Electric Engine";
             }
-            string msg = ($"{Name} {LicenseNumber} , {PercentageOfEnergyLeft} energy left,{this.GetWheelCount()} Wheels with {this.GetWheelAirPressure()} air pressure \n {enginenName} ")+($"\n This car work On {m_CarType}, is color is {m_CarColor} and have {m_CarDoorAmount} doors\n ");
+            string msg = ($"{Name} {LicenseNumber} , {PercentageOfEnergyLeft} energy left,{this.GetWheelCount()} Wheels with {this.GetWheelAirPressure()} air pressure \n{enginenName} ")+($"\n This car work On {m_CarType}, is color is {m_CarColor} and have {m_CarDoorAmount} doors\n ");
             return msg;
         }
 
